@@ -13,3 +13,22 @@ p{
 
     color: var(--light-grey); 
 }
+
+.cta{
+    font-family: var(--button-fontfam);
+    font-size: var(--button-fontsize);
+    font-weight: var(--button-fontweight);
+    
+    letter-spacing: var(--button-letterspacing);
+
+    color: var(--button-color-text); 
+
+}
+
+.main-cta{
+    background-color: var(--main-button-color);
+}
+
+.secondary-cta{
+    background-color: var(--second-button-color);
+}

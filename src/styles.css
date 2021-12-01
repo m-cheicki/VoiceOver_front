@@ -9,9 +9,13 @@
     --dark-red:   #9c1634; 
     --light-grey: #dfe7ec; 
 
+    --light-blue-600: #203D4B; 
+
+
     /** Font style **/
     --family-header: 'Roboto Mono', monospace;
     --family-body: 'Inter', sans-serif; 
+    --family-button: 'Inter', sans-serif; 
 
     --size-header-1: 4em; 
     --size-header-2: 3em; 
@@ -25,6 +29,15 @@
     /** Navigation **/
 
     /** Call-to-actions **/
+    --button-fontfam: var(--family-button);
+    --button-fontsize: 1em;
+    --button-fontweight: 600;
+    --button-lineheight: 160%;
+    --button-letterspacing: 2%;
+    --button-color-text: var(--light-grey); 
+
+    --main-button-color: var(--dark-red); 
+    --second-button-color: var(--light-blue-600); 
 
     /** Cards **/
 
