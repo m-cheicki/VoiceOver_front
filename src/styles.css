@@ -65,10 +65,12 @@ html, body{
 main section{
     position: relative;
     top: 80px; 
-    padding: 64px 96px 0;
+    padding: 64px 32px 64px 96px;
     color: var(--light-grey);
-    border: solid 1px;
-    height: 100%;
+    height: calc(100vh - 270px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer{

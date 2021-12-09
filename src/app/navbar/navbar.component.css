@@ -1,0 +1,28 @@
+ul{
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.step{
+    list-style-type: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 100%;
+    background: var(--light-blue-600);
+    margin: 8px 0;
+}
+
+.step.done, 
+.step.active{
+    background-color: var(--light-grey);
+}
+
+.step.active{
+    height: 32px;
+    width: 32px;
+}
