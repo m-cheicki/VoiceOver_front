@@ -53,11 +53,29 @@
 
 }
 
-body{
+html, body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
     background-color: var(--dark-blue);
+
 }
 
+main section{
+    position: relative;
+    top: 80px; 
+    padding: 64px 96px 0;
+    color: var(--light-grey);
+    border: solid 1px;
+    height: 100%;
+}
+
+footer{
+    background-color: var(--black);
+    height: 64px;
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+}
