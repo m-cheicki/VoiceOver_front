@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Cards } from './interfaces/card';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

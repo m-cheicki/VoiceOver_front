@@ -6,11 +6,15 @@ import { AkarMicrophone, AkarDesktopDevice, AkarVideo, AkarSquareFill, AkarPlay,
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent
+    CardComponent,
+    TopBarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

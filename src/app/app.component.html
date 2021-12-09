@@ -1,11 +1,8 @@
-<h1>VoiceOver</h1>
-
-<p>Velit et nisi laboris dolor fugiat. Laboris excepteur et cillum amet irure. Incididunt esse cillum excepteur fugiat fugiat enim incididunt aute do dolore. Consectetur voluptate consequat mollit elit mollit qui sunt duis esse exercitation. Sint est cupidatat dolor commodo ad occaecat dolore proident culpa. Anim dolor tempor est duis veniam ut magna.
-Commodo esse aliqua adipisicing culpa ut excepteur sunt mollit dolore do sit. Consectetur voluptate in proident et irure aliqua ea elit duis ad dolor duis. Voluptate ex sint cillum ullamco laborum minim deserunt tempor tempor dolor nostrud irure ipsum aute. Cillum sit occaecat dolore id irure elit do labore. Elit fugiat irure irure sit dolor in dolore culpa ullamco eu consectetur officia. Reprehenderit Lorem adipisicing magna magna deserunt. In exercitation est eiusmod laborum deserunt tempor laborum.
-Ipsum exercitation ea Lorem id quis qui laborum. Fugiat deserunt enim excepteur nisi qui cupidatat aliquip incididunt ipsum voluptate commodo enim. Exercitation culpa est magna irure veniam aliquip sint irure anim in. Ullamco do qui velit non consequat quis.
-Labore nisi qui nostrud voluptate sint veniam consequat irure anim et excepteur. Commodo laboris quis irure laboris nostrud anim pariatur eu consequat dolor qui. Eiusmod occaecat Lorem magna anim laboris laboris deserunt ea labore sit irure ea aliquip cupidatat. Enim sint et labore non reprehenderit cupidatat laborum.</p>
-
-<button class="cta main-cta">Call-to-action</button>
-<button class="cta secondary-cta">Call-to-action</button>
-
-<card *ngFor="let card of cards" [card]="card" [purpose]="'STT'"></card>
+<main>
+    <top-bar></top-bar>
+    <section>
+        <router-outlet></router-outlet>
+        <navbar></navbar>
+    </section>
+    <footer></footer>
+</main>
