@@ -8,13 +8,31 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { InputChoiceComponent } from './input-choice/input-choice.component';
+import { RecordInputComponent } from './record-input/record-input.component';
+import { ComputerInputComponent } from './computer-input/computer-input.component';
+import { YoutubeURLInputComponent } from './youtube-url-input/youtube-url-input.component';
+import { TranscriptionComponent } from './transcription/transcription.component';
+import { TranslationComponent } from './translation/translation.component';
+import { ReadComponent } from './read/read.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     TopBarComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomepageComponent,
+    InputChoiceComponent,
+    RecordInputComponent,
+    ComputerInputComponent,
+    YoutubeURLInputComponent,
+    TranscriptionComponent,
+    TranslationComponent,
+    ReadComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
