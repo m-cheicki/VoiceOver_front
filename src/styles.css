@@ -22,8 +22,8 @@
     --size-header-3: 2em; 
     --size-header-4: 1.5em; 
 
-    --line-height-header: 140%; 
-    --line-height-body: 160%; 
+    --line-height-header: 1.5em; 
+    --line-height-body: 1.8em; 
 
     /**** UI Elements ****/
     /** Navigation **/
@@ -33,7 +33,7 @@
     --button-fontsize: 1em;
     --button-fontweight: 600;
     --button-lineheight: 160%;
-    --button-letterspacing: 2%;
+    --button-letterspacing: .1em;
     --button-color-text: var(--light-grey); 
 
     --main-button-color: var(--dark-red); 
@@ -57,27 +57,81 @@ html, body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     background-color: var(--dark-blue);
-
+    height: 100%;
 }
 
-main section{
-    position: relative;
-    top: 80px; 
-    padding: 64px 32px 64px 96px;
-    color: var(--light-grey);
-    height: calc(100vh - 270px);
+main{
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+section{
+    padding: 16px 96px;
+    color: var(--light-grey);
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
 }
 
 footer{
     background-color: var(--black);
     height: 64px;
     width: 100%;
+}
 
-    position: absolute;
-    bottom: 0;
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6{ 
+    font-family: var(--family-header);
+}
+
+h1{
+    font-size: var(--size-header-1);
+    line-height: var(--line-height-header);
+    margin: 0 0 12px;
+    color: var(--light-grey);
+    text-align: center;
+}
+
+p, li{
+    font-family: var(--family-body);
+    line-height: var(--line-height-body);
+    color: var(--light-grey); 
+}
+
+ol > li {
+    margin: 0 0 12px 0;
+}
+
+a, 
+a:hover{
+    text-decoration: none;
+}
+
+.cta{
+    font-family: var(--button-fontfam);
+    font-size: var(--button-fontsize);
+    letter-spacing: var(--button-letterspacing);
+    font-weight: var(--button-fontweight);
+    color: var(--button-color-text); 
+    display: block;
+    margin: 48px 0;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.main-cta{
+    background-color: var(--main-button-color);
+}
+
+.secondary-cta{
+    background-color: var(--second-button-color);
 }

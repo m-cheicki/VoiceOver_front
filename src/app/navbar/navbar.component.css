@@ -6,10 +6,10 @@ ul{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    list-style-type: none;
 }
 
 .step{
-    list-style-type: none;
     height: 16px;
     width: 16px;
     border-radius: 100%;

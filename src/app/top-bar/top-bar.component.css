@@ -1,9 +1,8 @@
 nav{
-    height: 48px;
+    height: 40px;
     padding: 16px 48px;
     box-shadow: 0 0 120px #0a0a0a80;
-    position: fixed;
-    top: 0;
+   
     left: 0;
     right: 0;
 }
