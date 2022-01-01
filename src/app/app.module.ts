@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgIconsModule } from '@ng-icons/core';
-import { AkarMicrophone, AkarDesktopDevice, AkarVideo, AkarSquareFill, AkarPlay, AkarCloudUpload, AkarSoundOn, AkarHeadphone, AkarSearch, AkarPlus } from '@ng-icons/akar-icons';
+import { AkarMicrophone, AkarDesktopDevice, AkarVideo, AkarSquare, AkarPlay, AkarCloudUpload, AkarSoundOn, AkarHeadphone, AkarSearch, AkarPlus, AkarTriangleFill } from '@ng-icons/akar-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +37,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgIconsModule.withIcons({ AkarMicrophone, AkarDesktopDevice, AkarVideo, AkarSquareFill, AkarPlay, AkarCloudUpload, AkarSoundOn, AkarHeadphone, AkarSearch, AkarPlus })
+    NgIconsModule.withIcons({ AkarMicrophone, AkarDesktopDevice, AkarVideo, AkarSquare, AkarPlay, AkarCloudUpload, AkarSoundOn, AkarHeadphone, AkarSearch, AkarPlus, AkarTriangleFill })
   ],
   providers: [],
   bootstrap: [AppComponent]
