@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Cards } from './interfaces/card';
 
 @Component({
   selector: 'app',
@@ -8,6 +7,4 @@ import { Cards } from './interfaces/card';
 })
 export class AppComponent {
   title = 'VoiceOver';
-  cards = Cards;
-
 }

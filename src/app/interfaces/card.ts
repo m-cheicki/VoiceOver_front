@@ -4,6 +4,7 @@ export class CardOptions {
     purpose: string;
     orientation: string;
     active: string;
+    link: string;
 
     constructor() {
         this.icon = '';
@@ -11,6 +12,7 @@ export class CardOptions {
         this.purpose = '';
         this.orientation = 'row';
         this.active = 'false';
+        this.link = '/';
     }
 }
 
@@ -20,21 +22,26 @@ export const Cards = [
         text: 'Enregistrer un audio',
         purpose: 'STT',
         orientation: 'column',
-        active: 'false'
+        active: 'false',
+        link: '/record'
     },
     {
         icon: 'akar-desktop-device',
         text: 'Téléverser depuis mon appareil',
         purpose: 'STT',
         orientation: 'column',
-        active: 'false'
+        active: 'false',
+        link: '/from-computer'
+
     },
     {
         icon: 'akar-video',
         text: 'Entrer une URL YouTube',
         purpose: 'STT',
         orientation: 'column',
-        active: 'false'
+        active: 'false',
+        link: '/from-youtube'
+
     },
     {
         icon: 'akar-sound-on',
