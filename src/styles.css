@@ -135,3 +135,8 @@ a:hover{
 .secondary-cta{
     background-color: var(--second-button-color);
 }
+
+.flex-row {
+    display: flex;
+    flex-direction: row; 
+}

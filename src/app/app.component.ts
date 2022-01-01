@@ -8,6 +8,4 @@ import { Cards } from './interfaces/card';
 })
 export class AppComponent {
   title = 'VoiceOver';
-  cards = Cards;
-
 }
