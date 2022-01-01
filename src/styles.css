@@ -10,6 +10,7 @@
     --light-grey: #dfe7ec; 
 
     --light-blue-600: #203D4B; 
+    --dark-red-600: #70102A; 
 
 
     /** Font style **/
@@ -122,10 +123,17 @@ a:hover{
     font-weight: var(--button-fontweight);
     color: var(--button-color-text); 
     display: block;
-    margin: 48px 0;
+    margin: 48px auto;
     padding: 12px 24px;
     border-radius: 8px;
     text-align: center;
+    box-shadow: 0 0 0 0 var(--dark-red);
+    border: transparent;
+    cursor: pointer;
+}
+
+.cta:hover{
+    background-color: var(--dark-red-600);
 }
 
 .main-cta{

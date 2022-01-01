@@ -1,0 +1,36 @@
+.input-youtube{
+    width: 100%;
+    height: 36px; 
+
+    border-radius: 8px;
+    background-color: var(--light-blue-600);
+    border: solid 4px var(--light-blue);
+
+    padding: 4px 0 4px 8px;
+    color: var(--light-blue-600);
+}
+
+.input-youtube::placeholder{
+    color: var(--light-blue);
+}
+
+.youtube-iframe{
+    position: relative;
+    width: 100%; 
+    height: 0;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    height: 0;
+    padding-bottom: 40%;
+    margin: 48px auto;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
