@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ComputerInputComponent } from './computer-input/computer-input.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { InputChoiceComponent } from './input-choice/input-choice.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ReadComponent } from './read/read.component';
-import { RecordInputComponent } from './record-input/record-input.component';
 import { TranscriptionComponent } from './transcription/transcription.component';
 import { TranslationComponent } from './translation/translation.component';
-import { YoutubeURLInputComponent } from './youtube-url-input/youtube-url-input.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },

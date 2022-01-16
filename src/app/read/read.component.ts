@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Cards } from '../interfaces/card';
 
 @Component({
   selector: 'app-read',
@@ -12,8 +11,6 @@ export class ReadComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.cards = Cards;
-  }
+  ngOnInit(): void { }
 
 }
