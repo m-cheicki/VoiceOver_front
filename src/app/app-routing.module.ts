@@ -12,10 +12,7 @@ import { YoutubeURLInputComponent } from './youtube-url-input/youtube-url-input.
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
-  { path: 'upload', component: InputChoiceComponent },
-  { path: 'record', component: RecordInputComponent },
-  { path: 'from-computer', component: ComputerInputComponent },
-  { path: 'from-youtube', component: YoutubeURLInputComponent },
+  { path: 'upload', component: ComputerInputComponent },
   { path: 'transcription', component: TranscriptionComponent },
   { path: 'translation', component: TranslationComponent },
   { path: 'read', component: ReadComponent },
