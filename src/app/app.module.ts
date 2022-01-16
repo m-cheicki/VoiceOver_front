@@ -14,6 +14,10 @@ import { TranslationComponent } from './translation/translation.component';
 import { ReadComponent } from './read/read.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
+import { RequestInterceptor } from './request.interceptor';
+import { API_BASE_URL } from './services/services.config';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +33,17 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgIconsModule.withIcons({ AkarSquare, AkarPlay, AkarCloudUpload })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: API_BASE_URL, useValue: 'http://localhost:5000/api',
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

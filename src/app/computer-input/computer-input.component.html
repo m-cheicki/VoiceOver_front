@@ -1,2 +1,8 @@
 <h2>Téléverser un audio/une vidéo depuis mon appareil</h2>
 <p>Les fichiers acceptés sont audios sous format WAV uniquement. </p>
+
+<div>
+    <input #inputAudio type="file" name="audio" id="audio" placeholder="Select audio file" accept=".wav">
+    <button type="button" (click)="callApiSTT(inputAudio.files)">Call API STT</button>
+    <button type="button" (click)="callApiSTTAll(inputAudio.files)">Call API STT All</button> 
+</div> 
