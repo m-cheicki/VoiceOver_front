@@ -16,8 +16,16 @@
     
 </div>
 
+<div *ngIf="name.includes('.wav')">
+    <button 
+        class="cta main-cta"
+        type="button" 
+        (click)="callApiSTTAll(inputAudio.files)">
+        Transcrire cet audio
+    </button> 
+</div>
 
-<button type="button" (click)="callApiSTT(inputAudio.files)">Call API STT</button>
-<button type="button" (click)="callApiSTTAll(inputAudio.files)">Call API STT All</button> 
-
-
+<div *ngIf="transcription">
+    <h2>Transcription de l'audio</h2>
+    <p>{{transcription}}</p>
+</div>

@@ -11,6 +11,7 @@ export class ComputerInputComponent {
   @ViewChild('inputAudio') public audioInput!: HTMLInputElement;
 
   public name !: string;
+  public transcription !: string; 
 
   public constructor(
     private _sttService: SttService,
@@ -45,7 +46,15 @@ export class ComputerInputComponent {
     this._sttService.transcribeWithAll(file)
       .then(result => {
         this.audioInput.files = null;
-        console.log(result);
+
+        if (result[0].confidence > result[1].confidence
+          && (result[0].provider == 'rev' || result[0].provider == 'assembly')
+          && (result[1].provider == 'rev' || result[1].provider == 'assembly')) {
+          this.transcription = result[0].result;
+        }
+        else {
+          this.transcription = result[1].result;
+        }
       })
       .catch(err => console.error(err));
   }
