@@ -10,11 +10,20 @@ export class ComputerInputComponent {
 
   @ViewChild('inputAudio') public audioInput!: HTMLInputElement;
 
+  public name !: string;
+
   public constructor(
     private _sttService: SttService,
   ) { }
 
   ngOnInit(): void {
+    this.name = "Choisir un fichier";
+  }
+
+  public getName(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    this.name = files[0].name; 
   }
 
   public callApiSTT(files: FileList | null): void {
