@@ -11,7 +11,7 @@
         name="audio" 
         id="audio"
         placeholder="Select audio file" 
-        (change)="getName($event)"
+        (change)="initFile($event)"
         accept=".wav">
     
 </div>
@@ -28,4 +28,9 @@
 <div *ngIf="transcription">
     <h2>Transcription de l'audio</h2>
     <p>{{transcription}}</p>
+</div>
+
+<div *ngIf="translation">
+    <h2>Traduction de l'audio</h2>
+    <p>{{translation}}</p>
 </div>
