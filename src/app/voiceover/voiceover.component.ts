@@ -14,11 +14,8 @@ export class VoiceoverComponent implements OnInit {
 
   public name: string = "Choisir un fichier";
   public transcription: string = '';
-  public translation: string = '';
-
 
   public constructor(
-    private _translateService: TranslateService,
     private _sttService: SttService,
     private _ttsService: TtsService
   ) { }
@@ -30,7 +27,6 @@ export class VoiceoverComponent implements OnInit {
     const files = target.files as FileList;
     this.name = files[0].name;
     this.transcription = '';
-    this.translation = '';
   }
 
   public callApiSTTAll(files: FileList | null): void {
@@ -50,32 +46,17 @@ export class VoiceoverComponent implements OnInit {
         else {
           this.transcription = result[1].result;
         }
-
-        this.callApiTranslation(this.transcription);
         this.callApiTTS();
 
       })
       .catch(err => console.error(err));
   }
 
-  public callApiTranslation(text: string | null): void {
-    this.translation = '';
-
-    if (!text)
-      return
-
-    this._translateService.translate(text, 'en', 'google')
-      .then(result => {
-        this.translation = result.translation
-      })
-      .catch(err => console.error(err));
-  }
-
   public callApiTTS(): void {
-    if (!this.translation || this.translation.length === 0)
+    if (!this.transcription || this.transcription.length === 0)
       return
 
-    this._ttsService.tts(this.translation)
+    this._ttsService.tts(this.transcription)
       .then(result => {
         let link = document.createElement('a');
         link.style.display = 'none';
