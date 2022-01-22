@@ -17,6 +17,7 @@ export class VoiceoverComponent implements OnInit {
 
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
+  public stt: any[] = [];
 
   public constructor(
     private _sttService: SttService,
@@ -36,33 +37,25 @@ export class VoiceoverComponent implements OnInit {
       || this.audioInput.nativeElement.files.length === 0)
       return
 
-    const file: File = this.audioInput.nativeElement.files[0]
-    this.onSelectAudio.emit(file)
+    const file: File = this.audioInput.nativeElement.files[0];
+    this.onSelectAudio.emit(file);
 
-    const fileReader: FileReader = new FileReader()
-    fileReader.onload = this.updateInputAudioPlayer.bind(this)
-    fileReader.readAsDataURL(file)
+    const fileReader: FileReader = new FileReader();
+    fileReader.onload = this.updateInputAudioPlayer.bind(this);
+    fileReader.readAsDataURL(file);
   }
 
   public callApiSTTAll(files: FileList | null): void {
     if (!files || files.length === 0)
       return
+
     const file = files[0];
+
     this._sttService.transcribeWithAll(file)
       .then(result => {
         this.audioInput.nativeElement.files = null;
-
-        if (result[0].confidence > result[1].confidence
-          && (result[0].provider == 'rev' || result[0].provider == 'assembly')
-          && (result[1].provider == 'rev' || result[1].provider == 'assembly')) {
-          this.transcription = result[0].result;
-        }
-
-        else {
-          this.transcription = result[1].result;
-        }
+        this.stt = result;
       })
-      .then(x => this.generateAudio())
       .catch(err => console.error(err));
   }
 
@@ -70,27 +63,29 @@ export class VoiceoverComponent implements OnInit {
     if (!this.inputAudioPlayer)
       return
 
-    this.inputAudioPlayer.nativeElement.src = e.target.result
-    this.inputAudioPlayer.nativeElement.load()
+    this.inputAudioPlayer.nativeElement.src = e.target.result;
+    this.inputAudioPlayer.nativeElement.load();
   }
 
   private updateOutputAudioPlayer(e: any): void {
     if (!this.outputAudioPlayer)
       return
 
-    this.outputAudioPlayer.nativeElement.src = e.target.result
-    this.outputAudioPlayer.nativeElement.load()
+    this.outputAudioPlayer.nativeElement.src = e.target.result;
+    this.outputAudioPlayer.nativeElement.load();
   }
 
-  public generateAudio(): void {
-    if (!this.transcription || this.transcription.length === 0)
+  public generateAudio(text: string): void {
+    if (!text || text.length === 0)
       return
+
+    this.transcription = text;
 
     this._ttsService.tts(this.transcription)
       .then((result) => {
-        const fileReader: FileReader = new FileReader()
-        fileReader.onload = this.updateOutputAudioPlayer.bind(this)
-        fileReader.readAsDataURL(result)
+        const fileReader: FileReader = new FileReader();
+        fileReader.onload = this.updateOutputAudioPlayer.bind(this);
+        fileReader.readAsDataURL(result);
       })
   }
 }

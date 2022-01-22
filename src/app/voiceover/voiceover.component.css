@@ -27,7 +27,6 @@ input[type="file"] {
 
 .input-file {
     flex-grow: 2;
-    
 }
 
 .step-one audio {
@@ -38,4 +37,24 @@ input[type="file"] {
 .step-three > audio {
     width: 100%;
     margin: 12px 0;
+}
+
+table{
+    font-family: var(--family-body);
+}
+
+tr{
+    text-align: center;
+}
+tr:nth-child(even){
+    background: var(--light-blue-600);
+}
+th{
+    background: var(--light-blue);
+    color: var(--black);
+    padding: 0.5em 1em;
+    margin: 0;
+}
+td{
+    padding: 0.5em;
 }

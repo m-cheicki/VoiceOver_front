@@ -15,7 +15,6 @@
             placeholder="Select audio file" 
             (change)="initFile($event)"
             accept=".wav">
-            
         </div>
         
         <audio *ngIf="name.includes('.wav')" #inputAudioPlayer controls src="./"></audio>
@@ -30,13 +29,39 @@
     </button> 
 </div>
 
-<div class="step step-two" *ngIf="transcription">
+<div class="step step-two" *ngIf="stt.length !== 0">
     <h2>Transcription de l'audio</h2>
-    <p>{{transcription}}</p>
+    
+    <table>
+        <tr>
+            <th>Transcription</th>
+            <th>API utilisée</th>
+            <th>Taux de confiance</th>
+            <th>Temps (secondes)</th>
+            <th>Text-to-Speech</th>
+        </tr>
+        
+        <tr *ngFor="let res of stt">
+            <td>{{res.result}}</td>
+            <td>{{res.provider}}</td>
+            <td>{{res.confidence}}</td>
+            <td>{{res.time}}</td>
+            <td>
+                <button
+                    type="button" 
+                    *ngIf="res.result.length !== 0"
+                    (click)="generateAudio(res.result)"
+                    class="cta secondary-cta"
+                    >
+                    Générer le Text-to-Speech
+                </button>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div class="step step-three" *ngIf="transcription">
     <h2>Ecouter la transcription</h2>
+    <p>{{transcription}}</p>
     <audio #outputAudioPlayer controls src="./"></audio>
 </div>
-

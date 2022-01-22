@@ -31,8 +31,8 @@
 
     /** Call-to-actions **/
     --button-fontfam: var(--family-button);
-    --button-fontsize: 1em;
-    --button-fontweight: 600;
+    --button-fontsize: 0.85em;
+    --button-fontweight: 500;
     --button-lineheight: 160%;
     --button-letterspacing: .1em;
     --button-color-text: var(--light-grey); 
@@ -142,6 +142,7 @@ a:hover{
 
 .secondary-cta{
     background-color: var(--second-button-color);
+    border: solid 1px var(--light-blue);
 }
 
 .flex-row {
