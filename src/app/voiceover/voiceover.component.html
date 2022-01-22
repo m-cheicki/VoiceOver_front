@@ -1,27 +1,28 @@
 <h2>Choisir un fichier audio depuis mon appareil</h2>
-<p>Les fichiers acceptés sont des audios sous format WAV uniquement. </p>
+<p>Les fichiers acceptés sont des audios en ANGLAIS sous format WAV uniquement. </p>
 
-<div class="input-file">
-    <label for="audio" class="file-upload">
-        {{name}}
-    </label>
-    <input 
-        #inputAudio 
-        type="file" 
-        name="audio" 
-        id="audio"
-        placeholder="Select audio file" 
-        (change)="initFile($event)"
-        accept=".wav">
-    
-</div>
+<div class="step step-one">
+    <div>
+        <div class="input-file">
+            <label for="audio" class="file-upload">
+                {{name}}
+            </label>
+            <input 
+            #inputAudio 
+            type="file" 
+            name="audio" 
+            id="audio"
+            placeholder="Select audio file" 
+            (change)="initFile($event)"
+            accept=".wav">
+            
+        </div>
+        
+        <audio *ngIf="name.includes('.wav')" #inputAudioPlayer controls src="./"></audio>
+    </div>
 
-<div>
-    <audio #inputAudioPlayer controls src="./"></audio>
-</div>
-
-<div *ngIf="name.includes('.wav')">
     <button 
+        *ngIf="name.includes('.wav')"
         class="cta main-cta"
         type="button" 
         (click)="callApiSTTAll(inputAudio.files)">
@@ -29,12 +30,13 @@
     </button> 
 </div>
 
-<div *ngIf="transcription">
+<div class="step step-two" *ngIf="transcription">
     <h2>Transcription de l'audio</h2>
     <p>{{transcription}}</p>
 </div>
 
-<button type="button" mat-raised-button class="me-3" (click)="generateAudio()"
-    [disabled]="transcription.length === 0">Generate TTS</button>
-<audio #outputAudioPlayer controls src="./"></audio>
+<div class="step step-three" *ngIf="transcription">
+    <h2>Ecouter la transcription</h2>
+    <audio #outputAudioPlayer controls src="./"></audio>
+</div>
 

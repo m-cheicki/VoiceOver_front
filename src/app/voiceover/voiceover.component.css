@@ -14,3 +14,28 @@ input[type="file"] {
     border-radius: 16px;
     background-color: var(--light-blue-600);
 }
+
+.step {
+    margin: 48px 0; 
+}
+
+.step-one > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-file {
+    flex-grow: 2;
+    
+}
+
+.step-one audio {
+    margin: 0 0 0 96px;
+    flex: 2; 
+}
+
+.step-three > audio {
+    width: 100%;
+    margin: 12px 0;
+}

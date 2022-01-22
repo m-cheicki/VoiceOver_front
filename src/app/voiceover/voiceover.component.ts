@@ -62,6 +62,7 @@ export class VoiceoverComponent implements OnInit {
           this.transcription = result[1].result;
         }
       })
+      .then(x => this.generateAudio())
       .catch(err => console.error(err));
   }
 
