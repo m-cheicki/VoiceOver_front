@@ -30,3 +30,7 @@
     <p>{{transcription}}</p>
 </div>
 
+<button type="button" mat-raised-button class="me-3" (click)="generateAudio()"
+    [disabled]="transcription.length === 0">Generate TTS</button>
+<audio #audioPlayer controls src="./"></audio>
+

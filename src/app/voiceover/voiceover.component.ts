@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SttService } from '../services/stt.service';
-import { TranslateService } from '../services/translate.service';
 import { TtsService } from '../services/tts.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { TtsService } from '../services/tts.service';
 export class VoiceoverComponent implements OnInit {
 
   @ViewChild('inputAudio') public audioInput!: HTMLInputElement;
+  @ViewChild('audioPlayer') audioPlayer?: ElementRef<HTMLAudioElement>
 
   public name: string = "Choisir un fichier";
   public transcription: string = '';
@@ -46,26 +46,27 @@ export class VoiceoverComponent implements OnInit {
         else {
           this.transcription = result[1].result;
         }
-        this.callApiTTS();
-
       })
       .catch(err => console.error(err));
   }
 
-  public callApiTTS(): void {
+  private updateAudioPlayer(e: any): void {
+    if (!this.audioPlayer)
+      return
+
+    this.audioPlayer.nativeElement.src = e.target.result
+    this.audioPlayer.nativeElement.load()
+  }
+
+  public generateAudio(): void {
     if (!this.transcription || this.transcription.length === 0)
       return
 
     this._ttsService.tts(this.transcription)
-      .then(result => {
-        let link = document.createElement('a');
-        link.style.display = 'none';
-        link.href = window.URL.createObjectURL(result);
-        link.download = 'result.mp3';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      .then((result) => {
+        const fileReader: FileReader = new FileReader()
+        fileReader.onload = this.updateAudioPlayer.bind(this)
+        fileReader.readAsDataURL(result)
       })
-      .catch(err => console.error(err));
   }
 }
