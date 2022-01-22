@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SttService } from '../services/stt.service';
 import { TranslateService } from '../services/translate.service';
+import { TtsService } from '../services/tts.service';
 
 @Component({
-  selector: 'app-computer-input',
-  templateUrl: './computer-input.component.html',
-  styleUrls: ['./computer-input.component.css']
+  selector: 'app-voiceover',
+  templateUrl: './voiceover.component.html',
+  styleUrls: ['./voiceover.component.css']
 })
-export class ComputerInputComponent {
+export class VoiceoverComponent implements OnInit {
 
   @ViewChild('inputAudio') public audioInput!: HTMLInputElement;
 
@@ -19,9 +20,10 @@ export class ComputerInputComponent {
   public constructor(
     private _translateService: TranslateService,
     private _sttService: SttService,
+    private _ttsService: TtsService
   ) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   public initFile(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -50,6 +52,7 @@ export class ComputerInputComponent {
         }
 
         this.callApiTranslation(this.transcription);
+        this.callApiTTS();
 
       })
       .catch(err => console.error(err));
@@ -64,6 +67,23 @@ export class ComputerInputComponent {
     this._translateService.translate(text, 'en', 'google')
       .then(result => {
         this.translation = result.translation
+      })
+      .catch(err => console.error(err));
+  }
+
+  public callApiTTS(): void {
+    if (!this.translation || this.translation.length === 0)
+      return
+
+    this._ttsService.tts(this.translation)
+      .then(result => {
+        let link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = window.URL.createObjectURL(result);
+        link.download = 'result.mp3';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       })
       .catch(err => console.error(err));
   }

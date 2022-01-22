@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TranscriptionComponent } from './transcription.component';
+import { VoiceoverComponent } from './voiceover.component';
 
-describe('TranscriptionComponent', () => {
-  let component: TranscriptionComponent;
-  let fixture: ComponentFixture<TranscriptionComponent>;
+describe('VoiceoverComponent', () => {
+  let component: VoiceoverComponent;
+  let fixture: ComponentFixture<VoiceoverComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TranscriptionComponent ]
+      declarations: [ VoiceoverComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TranscriptionComponent);
+    fixture = TestBed.createComponent(VoiceoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
