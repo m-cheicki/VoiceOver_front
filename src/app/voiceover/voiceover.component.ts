@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { SttService } from '../services/stt.service';
-import { TtsService } from '../services/tts.service';
+import { FileParameter, STTService, TranscriptionResult, TTSService } from '../services/api.service';
 
 @Component({
   selector: 'app-voiceover',
@@ -17,12 +16,12 @@ export class VoiceoverComponent implements OnInit {
 
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
-  public stt: any[] = [];
+  public stt!: TranscriptionResult[];
   public load: boolean = false;
 
   public constructor(
-    private _sttService: SttService,
-    private _ttsService: TtsService
+    private _sttService: STTService,
+    private _ttsService: TTSService
   ) { }
 
   ngOnInit(): void { }
@@ -55,14 +54,35 @@ export class VoiceoverComponent implements OnInit {
 
     const file = files[0];
 
-    this._sttService.transcribeWithAll(file)
-      .then(result => {
-        this.audioInput.nativeElement.files = null;
-        this.load = false;
-        this.stt = result;
-      })
-      .catch(err => console.error(err));
+    var fileParam !: FileParameter;
+    fileParam.fileName = file.name;
+    fileParam.data = file;
+
+    this._sttService.withAll(fileParam, null)
+      .subscribe(
+        result => {
+          this.load = false;
+          this.stt = result;
+          this.audioInput.nativeElement.files = null;
+        }
+      );
   }
+
+  public generateAudio(text: string): void {
+    if (!text || text.length === 0)
+    return
+    
+    this.transcription = text;
+    
+    this._ttsService.synthesize(this.transcription, 'google', 'en')
+    .subscribe(
+      result => {
+        const fileReader: FileReader = new FileReader();
+        fileReader.onload = this.updateOutputAudioPlayer.bind(this);
+          fileReader.readAsDataURL(result.data);
+        }
+        );
+      }
 
   private updateInputAudioPlayer(e: any): void {
     if (!this.inputAudioPlayer)
@@ -78,19 +98,5 @@ export class VoiceoverComponent implements OnInit {
 
     this.outputAudioPlayer.nativeElement.src = e.target.result;
     this.outputAudioPlayer.nativeElement.load();
-  }
-
-  public generateAudio(text: string): void {
-    if (!text || text.length === 0)
-      return
-
-    this.transcription = text;
-
-    this._ttsService.tts(this.transcription)
-      .then((result) => {
-        const fileReader: FileReader = new FileReader();
-        fileReader.onload = this.updateOutputAudioPlayer.bind(this);
-        fileReader.readAsDataURL(result);
-      })
   }
 }

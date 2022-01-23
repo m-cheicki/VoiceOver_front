@@ -57,15 +57,15 @@
         </tr>
         
         <tr *ngFor="let res of stt">
-            <td>{{res.result}}</td>
+            <td>{{res.transcription}}</td>
             <td>{{res.provider}}</td>
             <td>{{res.confidence}}</td>
             <td>{{res.time}}</td>
             <td>
                 <button
                     type="button" 
-                    *ngIf="res.result.length !== 0"
-                    (click)="generateAudio(res.result)"
+                    *ngIf="res.transcription !== undefined && res.transcription.length !== 0 "
+                    (click)="generateAudio(res.transcription)"
                     class="cta secondary-cta"
                     >
                     Générer le Text-to-Speech
