@@ -59,12 +59,12 @@
         <tr *ngFor="let res of stt">
             <td>{{res.transcription}}</td>
             <td>{{res.provider}}</td>
-            <td>{{res.confidence}}</td>
+            <td>{{res.confidence | number:'1.2-2'}}</td>
             <td>{{res.time}}</td>
             <td>
                 <button
                     type="button" 
-                    *ngIf="res.transcription !== undefined && res.transcription.length !== 0 "
+                    *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
                     (click)="generateAudio(res.transcription)"
                     class="cta secondary-cta"
                     >

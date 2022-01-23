@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { FileParameter, STTService, TranscriptionResult, TTSService } from '../services/api.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class VoiceoverComponent implements OnInit {
 
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
-  public stt!: TranscriptionResult[];
+  public stt: TranscriptionResult[] = [];
   public load: boolean = false;
 
   public constructor(
@@ -31,7 +32,6 @@ export class VoiceoverComponent implements OnInit {
     const files = target.files as FileList;
     this.name = files[0].name;
     this.transcription = '';
-    this.stt = [];
     this.load = false;
 
     if (!this.audioInput
@@ -54,35 +54,37 @@ export class VoiceoverComponent implements OnInit {
 
     const file = files[0];
 
-    var fileParam !: FileParameter;
-    fileParam.fileName = file.name;
-    fileParam.data = file;
+    let fileParam: FileParameter = {
+      fileName: file.name,
+      data: file
+    };
 
-    this._sttService.withAll(fileParam, null)
-      .subscribe(
-        result => {
-          this.load = false;
-          this.stt = result;
-          this.audioInput.nativeElement.files = null;
-        }
-      );
+    const observation = this._sttService.withAll(fileParam, undefined);
+    lastValueFrom(observation).then(
+      result => {
+        console.log(result);
+        this.load = false;
+        this.stt = result;
+        this.audioInput.nativeElement.files = null;
+      }
+    ).catch(err => console.log(err));
   }
 
   public generateAudio(text: string): void {
     if (!text || text.length === 0)
-    return
-    
+      return
+
     this.transcription = text;
-    
-    this._ttsService.synthesize(this.transcription, 'google', 'en')
-    .subscribe(
+
+    const observation = this._ttsService.synthesize(this.transcription, 'google', 'en');
+    lastValueFrom(observation).then(
       result => {
         const fileReader: FileReader = new FileReader();
         fileReader.onload = this.updateOutputAudioPlayer.bind(this);
-          fileReader.readAsDataURL(result.data);
-        }
-        );
+        fileReader.readAsDataURL(result.data);
       }
+    ).catch(err => console.log(err)); 
+  }
 
   private updateInputAudioPlayer(e: any): void {
     if (!this.inputAudioPlayer)
