@@ -21,12 +21,27 @@
     </div>
 
     <button 
-        *ngIf="name.includes('.wav')"
+        *ngIf="name.includes('.wav') && !load"
         class="cta main-cta"
         type="button" 
         (click)="callApiSTTAll(inputAudio.files)">
         Transcrire cet audio
     </button> 
+
+    <div class="load-container" *ngIf="load">
+        <div class="load">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+    </div>
 </div>
 
 <div class="step step-two" *ngIf="stt.length !== 0">

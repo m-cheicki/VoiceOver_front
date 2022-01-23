@@ -18,6 +18,7 @@ export class VoiceoverComponent implements OnInit {
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
   public stt: any[] = [];
+  public load: boolean = false;
 
   public constructor(
     private _sttService: SttService,
@@ -31,6 +32,8 @@ export class VoiceoverComponent implements OnInit {
     const files = target.files as FileList;
     this.name = files[0].name;
     this.transcription = '';
+    this.stt = [];
+    this.load = false;
 
     if (!this.audioInput
       || !this.audioInput.nativeElement.files
@@ -46,6 +49,7 @@ export class VoiceoverComponent implements OnInit {
   }
 
   public callApiSTTAll(files: FileList | null): void {
+    this.load = true;
     if (!files || files.length === 0)
       return
 
@@ -54,6 +58,7 @@ export class VoiceoverComponent implements OnInit {
     this._sttService.transcribeWithAll(file)
       .then(result => {
         this.audioInput.nativeElement.files = null;
+        this.load = false;
         this.stt = result;
       })
       .catch(err => console.error(err));
