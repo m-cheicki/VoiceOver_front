@@ -57,18 +57,30 @@
         </tr>
         
         <tr *ngFor="let res of stt">
-            <td>{{res.result}}</td>
+            <td>{{res.transcription}}</td>
             <td>{{res.provider}}</td>
-            <td>{{res.confidence}}</td>
-            <td>{{res.time}}</td>
             <td>
+                <span class="{{ rankConfidence(res.confidence) }}">{{res.confidence | number:'1.2-2'}}</span>
+            </td>
+            <td>
+                <span class="{{ rankTime(res.time) }}">{{res.time | number:'1.2-2'}}</span>
+            </td>
+            <td style="display: flex; justify-content: center; align-items: center;">
                 <button
                     type="button" 
-                    *ngIf="res.result.length !== 0"
-                    (click)="generateAudio(res.result)"
+                    *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
+                    (click)="generateAudio(res.transcription, 'google', 'en')"
                     class="cta secondary-cta"
                     >
-                    Générer le Text-to-Speech
+                    Femme
+                </button>
+                <button
+                    type="button" 
+                    *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
+                    (click)="generateAudio(res.transcription, 'ibm', 'en')"
+                    class="cta secondary-cta"
+                    >
+                    Homme 
                 </button>
             </td>
         </tr>
@@ -78,5 +90,20 @@
 <div class="step step-three" *ngIf="transcription">
     <h2>Ecouter la transcription</h2>
     <p>{{transcription}}</p>
-    <audio #outputAudioPlayer controls src="./"></audio>
+
+    <div class="load-container" *ngIf="load">
+        <div class="load">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+    </div>
+    <audio #outputAudioPlayer controls *ngIf="!load" src="./"></audio>
 </div>

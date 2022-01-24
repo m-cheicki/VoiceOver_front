@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,8 +11,9 @@ import { VoiceoverComponent } from './voiceover/voiceover.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { RequestInterceptor } from './request.interceptor';
-import { API_BASE_URL } from './services/services.config';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { API_BASE_URL } from './services/api.service';
+import { environment } from 'src/environments/environment';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,10 +27,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {
-      provide: API_BASE_URL, useValue: 'http://localhost:5000/api',
+      provide: API_BASE_URL, useValue: environment.base_api_url,
     },
     {
       provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true

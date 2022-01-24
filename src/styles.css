@@ -12,6 +12,9 @@
     --light-blue-600: #203D4B; 
     --dark-red-600: #70102A; 
 
+    --success : #00990F; 
+    --warning: #EDB012; 
+    --error: #B61616; 
 
     /** Font style **/
     --family-header: 'Roboto Mono', monospace;
@@ -143,6 +146,7 @@ a:hover{
 .secondary-cta{
     background-color: var(--second-button-color);
     border: solid 1px var(--light-blue);
+    margin: 0 4px;
 }
 
 .flex-row {
@@ -154,4 +158,66 @@ a:hover{
 
 .col-2-content > div {
     margin: 0 24px;
+}
+
+/** LOADER **/
+
+.load-container{
+    width: 100%;
+    margin: 96px 0;
+}
+.load {
+  height: 75px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.wave {
+  width: 5px;
+  height: 75px;
+  background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
+  margin: 10px;
+  animation: wave 1s linear infinite;
+  border-radius: 20px;
+}
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }

@@ -46,9 +46,11 @@ table{
 tr{
     text-align: center;
 }
+
 tr:nth-child(even){
     background: var(--light-blue-600);
 }
+
 th{
     background: var(--light-blue);
     color: var(--black);
@@ -56,64 +58,23 @@ th{
     margin: 0;
 }
 td{
-    padding: 0.5em;
-}
-.load-container{
-    width: 100%;
-    margin: 96px 0;
-}
-.load {
-  height: 75px;
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
-.wave {
-  width: 5px;
-  height: 75px;
-  background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
-  margin: 10px;
-  animation: wave 1s linear infinite;
-  border-radius: 20px;
-}
-.wave:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.wave:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.wave:nth-child(4) {
-  animation-delay: 0.3s;
-}
-.wave:nth-child(5) {
-  animation-delay: 0.4s;
-}
-.wave:nth-child(6) {
-  animation-delay: 0.5s;
-}
-.wave:nth-child(7) {
-  animation-delay: 0.6s;
-}
-.wave:nth-child(8) {
-  animation-delay: 0.7s;
-}
-.wave:nth-child(9) {
-  animation-delay: 0.8s;
-}
-.wave:nth-child(10) {
-  animation-delay: 0.9s;
+    padding: 1em;
 }
 
-@keyframes wave {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
+tr > td > span{
+  padding: 0.25em 0.7em;
+  border-radius: 4px;
+}
+
+.top-1{
+  background-color: var(--success);
+}
+
+.top-2{
+  background-color: var(--warning);
+  color: var(--black);
+}
+
+.top-3{
+  background-color: var(--error);
 }

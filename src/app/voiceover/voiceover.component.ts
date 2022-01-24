@@ -1,7 +1,8 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { SttService } from '../services/stt.service';
-import { TtsService } from '../services/tts.service';
+import { lastValueFrom } from 'rxjs';
+import { FileParameter, STTService, TranscriptionResult, TTSService } from '../services/api.service';
 
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-voiceover',
   templateUrl: './voiceover.component.html',
@@ -17,12 +18,14 @@ export class VoiceoverComponent implements OnInit {
 
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
-  public stt: any[] = [];
+  public stt: TranscriptionResult[] = [];
   public load: boolean = false;
+  public test: string = 'top-1'
 
   public constructor(
-    private _sttService: SttService,
-    private _ttsService: TtsService
+    private _sttService: STTService,
+    private _ttsService: TTSService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void { }
@@ -32,7 +35,6 @@ export class VoiceoverComponent implements OnInit {
     const files = target.files as FileList;
     this.name = files[0].name;
     this.transcription = '';
-    this.stt = [];
     this.load = false;
 
     if (!this.audioInput
@@ -55,13 +57,44 @@ export class VoiceoverComponent implements OnInit {
 
     const file = files[0];
 
-    this._sttService.transcribeWithAll(file)
-      .then(result => {
-        this.audioInput.nativeElement.files = null;
+    let fileParam: FileParameter = {
+      fileName: file.name,
+      data: file
+    };
+
+    const observation = this._sttService.withAll(fileParam, undefined);
+    lastValueFrom(observation).then(
+      result => {
+        console.log(result);
         this.load = false;
         this.stt = result;
-      })
-      .catch(err => console.error(err));
+        this.audioInput.nativeElement.files = null;
+      }
+    ).catch(err => {
+      this.load = false;
+      this.toastr.error(err);
+    });
+  }
+
+  public generateAudio(text: string, provider: string, language: string): void {
+    if (!text || text.length === 0)
+      return
+
+    this.load = true;
+    this.transcription = text;
+
+    const observation = this._ttsService.synthesize(this.transcription, provider, language);
+    lastValueFrom(observation).then(
+      result => {
+        const fileReader: FileReader = new FileReader();
+        fileReader.onload = this.updateOutputAudioPlayer.bind(this);
+        fileReader.readAsDataURL(result.data);
+        this.load = false;
+      }
+    ).catch(err => {
+      this.load = false;
+      this.toastr.error(err);
+    });
   }
 
   private updateInputAudioPlayer(e: any): void {
@@ -80,17 +113,61 @@ export class VoiceoverComponent implements OnInit {
     this.outputAudioPlayer.nativeElement.load();
   }
 
-  public generateAudio(text: string): void {
-    if (!text || text.length === 0)
-      return
+  public rankConfidence(value: (number | undefined)): string {
+    let allConfidence: number[] = [];
 
-    this.transcription = text;
+    this.stt.forEach(transcript => {
+      if (transcript.confidence !== undefined) {
+        allConfidence.push(transcript.confidence)
+      }
+    });
 
-    this._ttsService.tts(this.transcription)
-      .then((result) => {
-        const fileReader: FileReader = new FileReader();
-        fileReader.onload = this.updateOutputAudioPlayer.bind(this);
-        fileReader.readAsDataURL(result);
-      })
+    allConfidence.sort(function (a, b) { return b - a });
+
+    if (value !== undefined)
+      return this.ranking(allConfidence, value);
+
+    return '';
+  }
+
+  public rankTime(value: (number | undefined)): string {
+    let allTime: number[] = [];
+
+    this.stt.forEach(transcript => {
+      if (transcript.time !== undefined) {
+        allTime.push(transcript.time)
+      }
+    });
+
+    allTime.sort(function (a, b) { return a - b });
+
+    if (value !== undefined)
+      return this.ranking(allTime, value);
+
+    return '';
+  }
+
+  private ranking(list: number[], value: number): string {
+    let cssClass = '';
+
+    if (list == undefined)
+      return ''
+
+    switch (list.indexOf(value)) {
+      case 0:
+        cssClass = 'top-1';
+        break;
+      case 1:
+        cssClass = 'top-2';
+        break;
+      case 2:
+        cssClass = 'top-3';
+        break;
+      default:
+        cssClass = '';
+        break;
+    }
+
+    return cssClass;
   }
 }
