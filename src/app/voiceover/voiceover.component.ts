@@ -19,7 +19,8 @@ export class VoiceoverComponent implements OnInit {
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
   public stt: TranscriptionResult[] = [];
-  public load: boolean = false;
+  public loadSTT: boolean = false;
+  public loadTTS: boolean = false;
 
   public constructor(
     private _sttService: STTService,
@@ -29,12 +30,18 @@ export class VoiceoverComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  private reset(): void {
+    this.transcription = '';
+    this.loadSTT = false;
+    this.loadTTS = false;
+    this.stt = [];
+  }
+
   public initFile(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
     this.name = files[0].name;
-    this.transcription = '';
-    this.load = false;
+    this.reset();
 
     if (!this.audioInput
       || !this.audioInput.nativeElement.files
@@ -50,7 +57,7 @@ export class VoiceoverComponent implements OnInit {
   }
 
   public callApiSTTAll(files: FileList | null): void {
-    this.load = true;
+    this.loadSTT = true;
     if (!files || files.length === 0)
       return
 
@@ -65,12 +72,12 @@ export class VoiceoverComponent implements OnInit {
     lastValueFrom(observation).then(
       result => {
         console.log(result);
-        this.load = false;
+        this.loadSTT = false;
         this.stt = result;
         this.audioInput.nativeElement.files = null;
       }
     ).catch(err => {
-      this.load = false;
+      this.loadSTT = false;
       this.toastr.error(err);
     });
   }
@@ -79,7 +86,7 @@ export class VoiceoverComponent implements OnInit {
     if (!text || text.length === 0)
       return
 
-    this.load = true;
+    this.loadTTS = true;
     this.transcription = text;
 
     const observation = this._ttsService.synthesize(this.transcription, provider, language);
@@ -88,10 +95,10 @@ export class VoiceoverComponent implements OnInit {
         const fileReader: FileReader = new FileReader();
         fileReader.onload = this.updateOutputAudioPlayer.bind(this);
         fileReader.readAsDataURL(result.data);
-        this.load = false;
+        this.loadTTS = false;
       }
     ).catch(err => {
-      this.load = false;
+      this.loadTTS = false;
       this.toastr.error(err);
     });
   }

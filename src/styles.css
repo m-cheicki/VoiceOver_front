@@ -146,7 +146,8 @@ a:hover{
 .secondary-cta{
     background-color: var(--second-button-color);
     border: solid 1px var(--light-blue);
-    margin: 0 4px;
+    margin: 12px 4px;
+    display: inline-block;
 }
 
 .flex-row {
