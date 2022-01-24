@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { lastValueFrom } from 'rxjs';
 import { FileParameter, STTService, TranscriptionResult, TTSService } from '../services/api.service';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-voiceover',
   templateUrl: './voiceover.component.html',
@@ -22,7 +24,8 @@ export class VoiceoverComponent implements OnInit {
 
   public constructor(
     private _sttService: STTService,
-    private _ttsService: TTSService
+    private _ttsService: TTSService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void { }
@@ -67,7 +70,7 @@ export class VoiceoverComponent implements OnInit {
         this.stt = result;
         this.audioInput.nativeElement.files = null;
       }
-    ).catch(err => console.log(err));
+    ).catch(err => this.toastr.error(err));
   }
 
   public generateAudio(text: string): void {
@@ -83,7 +86,7 @@ export class VoiceoverComponent implements OnInit {
         fileReader.onload = this.updateOutputAudioPlayer.bind(this);
         fileReader.readAsDataURL(result.data);
       }
-    ).catch(err => console.log(err)); 
+    ).catch(err => this.toastr.error(err));
   }
 
   private updateInputAudioPlayer(e: any): void {
