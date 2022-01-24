@@ -59,16 +59,20 @@
         <tr *ngFor="let res of stt">
             <td>{{res.transcription}}</td>
             <td>{{res.provider}}</td>
-            <td>{{res.confidence | number:'1.2-2'}}</td>
-            <td>{{res.time | number:'1.2-2'}}</td>
             <td>
+                <span class="{{ rankConfidence(res.confidence) }}">{{res.confidence | number:'1.2-2'}}</span>
+            </td>
+            <td>
+                <span class="{{ rankTime(res.time) }}">{{res.time | number:'1.2-2'}}</span>
+            </td>
+            <td style="display: flex; justify-content: center; align-items: center;">
                 <button
                     type="button" 
                     *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
                     (click)="generateAudio(res.transcription, 'google', 'en')"
                     class="cta secondary-cta"
                     >
-                    Google - Femme
+                    Femme
                 </button>
                 <button
                     type="button" 
@@ -76,7 +80,7 @@
                     (click)="generateAudio(res.transcription, 'ibm', 'en')"
                     class="cta secondary-cta"
                     >
-                    IBM - Homme 
+                    Homme 
                 </button>
             </td>
         </tr>

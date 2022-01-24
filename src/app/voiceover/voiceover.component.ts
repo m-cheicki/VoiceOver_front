@@ -3,7 +3,6 @@ import { lastValueFrom } from 'rxjs';
 import { FileParameter, STTService, TranscriptionResult, TTSService } from '../services/api.service';
 
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-voiceover',
   templateUrl: './voiceover.component.html',
@@ -21,6 +20,7 @@ export class VoiceoverComponent implements OnInit {
   public transcription: string = '';
   public stt: TranscriptionResult[] = [];
   public load: boolean = false;
+  public test: string = 'top-1'
 
   public constructor(
     private _sttService: STTService,
@@ -111,5 +111,63 @@ export class VoiceoverComponent implements OnInit {
 
     this.outputAudioPlayer.nativeElement.src = e.target.result;
     this.outputAudioPlayer.nativeElement.load();
+  }
+
+  public rankConfidence(value: (number | undefined)): string {
+    let allConfidence: number[] = [];
+
+    this.stt.forEach(transcript => {
+      if (transcript.confidence !== undefined) {
+        allConfidence.push(transcript.confidence)
+      }
+    });
+
+    allConfidence.sort(function (a, b) { return b - a });
+
+    if (value !== undefined)
+      return this.ranking(allConfidence, value);
+
+    return '';
+  }
+
+  public rankTime(value: (number | undefined)): string {
+    let allTime: number[] = [];
+
+    this.stt.forEach(transcript => {
+      if (transcript.time !== undefined) {
+        allTime.push(transcript.time)
+      }
+    });
+
+    allTime.sort(function (a, b) { return a - b });
+
+    if (value !== undefined)
+      return this.ranking(allTime, value);
+
+    return '';
+  }
+
+  private ranking(list: number[], value: number): string {
+    let cssClass = '';
+
+    if (list == undefined)
+      return ''
+
+    switch (list.indexOf(value)) {
+      case 0:
+        cssClass = 'top-1';
+        break;
+      case 1:
+        cssClass = 'top-2';
+        break;
+      case 2:
+        cssClass = 'top-3';
+        break;
+      default:
+        cssClass = '';
+        break;
+    }
+
+    return cssClass;
   }
 }
