@@ -20,7 +20,6 @@ export class VoiceoverComponent implements OnInit {
   public transcription: string = '';
   public stt: TranscriptionResult[] = [];
   public load: boolean = false;
-  public test: string = 'top-1'
 
   public constructor(
     private _sttService: STTService,
