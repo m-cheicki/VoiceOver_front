@@ -70,23 +70,31 @@ export class VoiceoverComponent implements OnInit {
         this.stt = result;
         this.audioInput.nativeElement.files = null;
       }
-    ).catch(err => this.toastr.error(err));
+    ).catch(err => {
+      this.load = false;
+      this.toastr.error(err);
+    });
   }
 
-  public generateAudio(text: string): void {
+  public generateAudio(text: string, provider: string, language: string): void {
     if (!text || text.length === 0)
       return
 
+    this.load = true;
     this.transcription = text;
 
-    const observation = this._ttsService.synthesize(this.transcription, 'google', 'en');
+    const observation = this._ttsService.synthesize(this.transcription, provider, language);
     lastValueFrom(observation).then(
       result => {
         const fileReader: FileReader = new FileReader();
         fileReader.onload = this.updateOutputAudioPlayer.bind(this);
         fileReader.readAsDataURL(result.data);
+        this.load = false;
       }
-    ).catch(err => this.toastr.error(err));
+    ).catch(err => {
+      this.load = false;
+      this.toastr.error(err);
+    });
   }
 
   private updateInputAudioPlayer(e: any): void {

@@ -65,10 +65,18 @@
                 <button
                     type="button" 
                     *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
-                    (click)="generateAudio(res.transcription)"
+                    (click)="generateAudio(res.transcription, 'google', 'en')"
                     class="cta secondary-cta"
                     >
-                    Générer le Text-to-Speech
+                    Google - Femme
+                </button>
+                <button
+                    type="button" 
+                    *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
+                    (click)="generateAudio(res.transcription, 'ibm', 'en')"
+                    class="cta secondary-cta"
+                    >
+                    IBM - Homme 
                 </button>
             </td>
         </tr>
@@ -78,5 +86,20 @@
 <div class="step step-three" *ngIf="transcription">
     <h2>Ecouter la transcription</h2>
     <p>{{transcription}}</p>
-    <audio #outputAudioPlayer controls src="./"></audio>
+
+    <div class="load-container" *ngIf="load">
+        <div class="load">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+    </div>
+    <audio #outputAudioPlayer controls *ngIf="!load" src="./"></audio>
 </div>
