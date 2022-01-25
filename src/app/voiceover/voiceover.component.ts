@@ -21,7 +21,6 @@ export class VoiceoverComponent implements OnInit {
   public stt: TranscriptionResult[] = [];
   public loadSTT: boolean = false;
   public loadTTS: boolean = false;
-  public autoplay: boolean = false;
   public waiting_audio = new Audio();
 
   public constructor(
