@@ -21,14 +21,14 @@
     </div>
 
     <button 
-        *ngIf="name.includes('.wav') && !load"
+        *ngIf="name.includes('.wav') && !loadSTT"
         class="cta main-cta"
         type="button" 
         (click)="callApiSTTAll(inputAudio.files)">
         Transcrire cet audio
     </button> 
 
-    <div class="load-container" *ngIf="load">
+    <div class="load-container" *ngIf="loadSTT">
         <div class="load">
             <div class="wave"></div>
             <div class="wave"></div>
@@ -65,7 +65,7 @@
             <td>
                 <span class="{{ rankTime(res.time) }}">{{res.time | number:'1.2-2'}}</span>
             </td>
-            <td style="display: flex; justify-content: center; align-items: center;">
+            <td>
                 <button
                     type="button" 
                     *ngIf="res.transcription !== undefined && res.transcription?.length !== 0"
@@ -91,7 +91,7 @@
     <h2>Ecouter la transcription</h2>
     <p>{{transcription}}</p>
 
-    <div class="load-container" *ngIf="load">
+    <div class="load-container" *ngIf="loadTTS">
         <div class="load">
             <div class="wave"></div>
             <div class="wave"></div>
@@ -105,5 +105,5 @@
             <div class="wave"></div>
         </div>
     </div>
-    <audio #outputAudioPlayer controls *ngIf="!load" src="./"></audio>
+    <audio #outputAudioPlayer controls *ngIf="!loadTTS" src="./"></audio>
 </div>

@@ -1,0 +1,18 @@
+p a{
+    color: var(--dark-red);
+}
+
+q{
+    font-family: var(--family-body);
+    font-style: italic;
+}
+
+audio{
+    margin: 0 0 48px;
+}
+
+.details{
+    font-size: small;
+    font-weight: 600;
+    color: var(--light-blue-600);
+}

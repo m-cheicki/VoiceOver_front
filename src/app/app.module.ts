@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgIconsModule } from '@ng-icons/core';
+import { AkarGithubFill } from '@ng-icons/akar-icons';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +17,7 @@ import { RequestInterceptor } from './request.interceptor';
 import { API_BASE_URL } from './services/api.service';
 import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
+import { VoicecloningComponent } from './voicecloning/voicecloning.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,16 @@ import { ToastrModule } from 'ngx-toastr';
     TopBarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    VoiceoverComponent
+    VoiceoverComponent,
+    VoicecloningComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgIconsModule.withIcons({ AkarGithubFill })
   ],
   providers: [
     {

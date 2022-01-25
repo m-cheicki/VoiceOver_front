@@ -29,32 +29,16 @@
     --line-height-header: 1.5em; 
     --line-height-body: 1.8em; 
 
-    /**** UI Elements ****/
-    /** Navigation **/
-
     /** Call-to-actions **/
     --button-fontfam: var(--family-button);
-    --button-fontsize: 0.85em;
-    --button-fontweight: 500;
+    --button-fontsize: 1em;
+    --button-fontweight: 600;
     --button-lineheight: 160%;
-    --button-letterspacing: .1em;
+    --button-letterspacing: .05em;
     --button-color-text: var(--light-grey); 
 
     --main-button-color: var(--dark-red); 
     --second-button-color: var(--light-blue-600); 
-
-    /** Checkboxes & Radios **/
-
-    /** Inputs **/
-
-    /** Drag and drop area **/
-
-    /** Loaders and progress bar **/
-
-    /** Modals **/
-
-    /** Notifications **/
-
 }
 
 html, body{
@@ -82,9 +66,25 @@ section{
 }
 
 footer{
-    background-color: var(--black);
+    background-color: #0e3244;
     height: 64px;
-    width: 100%;
+    width: calc(100% - 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 48px;
+}
+
+footer div a {
+    margin: 0 12px;
+    color: transparent;
+    font-size: X-large;
+    opacity: 0.2; 
+    filter: invert(100%);
+}
+
+footer div a:hover{
+    opacity: 1; 
 }
 
 h1, 
@@ -133,6 +133,7 @@ a:hover{
     box-shadow: 0 0 0 0 var(--dark-red);
     border: transparent;
     cursor: pointer;
+    width: fit-content;
 }
 
 .cta:hover{
@@ -146,7 +147,22 @@ a:hover{
 .secondary-cta{
     background-color: var(--second-button-color);
     border: solid 1px var(--light-blue);
-    margin: 0 4px;
+    margin: 12px 4px;
+    display: inline-block;
+}
+
+.secondary-cta:hover{
+    border: solid 1px var(--dark-red);
+}
+
+.tertiary-cta{
+    border: solid 2px var(--dark-red-600);
+    color: var(--dark-red-600);
+}
+
+.tertiary-cta:hover{
+    color: var(--light-grey);
+    font-weight: 500;
 }
 
 .flex-row {
@@ -161,53 +177,52 @@ a:hover{
 }
 
 /** LOADER **/
-
 .load-container{
     width: 100%;
     margin: 96px 0;
 }
 .load {
-  height: 75px;
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+    height: 75px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 .wave {
-  width: 5px;
-  height: 75px;
-  background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
-  margin: 10px;
-  animation: wave 1s linear infinite;
-  border-radius: 20px;
+    width: 5px;
+    height: 75px;
+    background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
+    margin: 10px;
+    animation: wave 1s linear infinite;
+    border-radius: 20px;
 }
 .wave:nth-child(2) {
-  animation-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 .wave:nth-child(3) {
-  animation-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 .wave:nth-child(4) {
-  animation-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 .wave:nth-child(5) {
-  animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 .wave:nth-child(6) {
-  animation-delay: 0.5s;
+    animation-delay: 0.5s;
 }
 .wave:nth-child(7) {
-  animation-delay: 0.6s;
+    animation-delay: 0.6s;
 }
 .wave:nth-child(8) {
-  animation-delay: 0.7s;
+    animation-delay: 0.7s;
 }
 .wave:nth-child(9) {
-  animation-delay: 0.8s;
+    animation-delay: 0.8s;
 }
 .wave:nth-child(10) {
-  animation-delay: 0.9s;
+    animation-delay: 0.9s;
 }
 
 @keyframes wave {

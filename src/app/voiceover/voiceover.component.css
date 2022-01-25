@@ -41,22 +41,28 @@ input[type="file"] {
 
 table{
     font-family: var(--family-body);
+    border-collapse: collapse;
+    width: 100%;
 }
 
-tr{
-    text-align: center;
+tr:hover{
+  background-color: var(--light-blue-600);
 }
-
-tr:nth-child(even){
-    background: var(--light-blue-600);
+  
+td{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: calc(100% / 7);
 }
 
 th{
-    background: var(--light-blue);
-    color: var(--black);
-    padding: 0.5em 1em;
-    margin: 0;
+  box-shadow: 0 2px 0px 0 var(--light-blue);
+  background-color: var(--light-blue-600);
+  color: var(--light-blue);
+  padding: 1em;
 }
+
 td{
     padding: 1em;
 }
@@ -64,6 +70,10 @@ td{
 tr > td > span{
   padding: 0.25em 0.7em;
   border-radius: 4px;
+}
+
+tr > td:first-child{
+  width: calc(300% / 7); 
 }
 
 .top-1{

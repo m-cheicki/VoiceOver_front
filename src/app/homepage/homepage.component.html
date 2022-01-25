@@ -1,21 +1,14 @@
 <h1>VoiceOver</h1>
-<p>VoiceOver est une application web permettant de traduire un média audiovisuel ou sonore (vidéo ou son) en français et de le lire, comme le doublage cinématographique, mais sans l'image. </p>
+<p>VoiceOver est une application web permettant de transcrire un audio anglais et de l'écouter avec une autre voix. </p>
 
 <h2>Comment ça fonctionne ? </h2>
-<p>Cela se déroule en 4 grandes étapes :</p>
+<p>Cela se déroule en 3 grandes étapes :</p>
+
 <ol>
-    <li>Choix de la source : 
-        <ul>
-            <li>Choix d'un fichier audio sous format wav</li>
-        </ul>
-    </li>
-    <li>Transcription : nous utilisons plusieurs algorithmes de Speech-to-Text (STT) pour retranscrire au mieux l'audio</li>
-    <li>Traduction : nous traduisons textuellement la transcription émise si ce texte n'est pas en anglais. </li>
-    <li>Lecture : nous faisons lire cette traduction grâce à notre Text-to-Speech (TTS) : 
-        <ul>
-            <li>Par une voix par défaut</li>
-        </ul>
-    </li>
+    <li>Je choisis ma source : un fichier audio (.wav) en anglais uniquement</li>
+    <li>Je transcris cet audio : plusieurs algorithmes vont s'en charger</li>
+    <li>J'écoute la transcription générée : un homme ou une femme, c'est vous qui choisissez !</li>
 </ol>
 
 <a routerLink="/voiceover" class="cta main-cta">C'est parti ! </a>
+<a routerLink="/voicecloning" class="cta tertiary-cta">Pour aller plus loin : le voice cloning</a>

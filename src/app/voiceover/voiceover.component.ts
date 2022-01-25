@@ -19,8 +19,9 @@ export class VoiceoverComponent implements OnInit {
   public name: string = "Choisir un fichier (WAV uniquement)";
   public transcription: string = '';
   public stt: TranscriptionResult[] = [];
-  public load: boolean = false;
-  public test: string = 'top-1'
+  public loadSTT: boolean = false;
+  public loadTTS: boolean = false;
+  public waiting_audio = new Audio();
 
   public constructor(
     private _sttService: STTService,
@@ -28,14 +29,22 @@ export class VoiceoverComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.waiting_audio.src = 'assets/audios/waiting_1.wav';
+  }
+
+  private reset(): void {
+    this.transcription = '';
+    this.loadSTT = false;
+    this.loadTTS = false;
+    this.stt = [];
+  }
 
   public initFile(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
     this.name = files[0].name;
-    this.transcription = '';
-    this.load = false;
+    this.reset();
 
     if (!this.audioInput
       || !this.audioInput.nativeElement.files
@@ -51,7 +60,9 @@ export class VoiceoverComponent implements OnInit {
   }
 
   public callApiSTTAll(files: FileList | null): void {
-    this.load = true;
+    this.loadSTT = true;
+    this.waiting_audio.play();
+
     if (!files || files.length === 0)
       return
 
@@ -65,13 +76,14 @@ export class VoiceoverComponent implements OnInit {
     const observation = this._sttService.withAll(fileParam, undefined);
     lastValueFrom(observation).then(
       result => {
-        console.log(result);
-        this.load = false;
+        this.loadSTT = false;
+        this.waiting_audio.pause();
         this.stt = result;
         this.audioInput.nativeElement.files = null;
       }
     ).catch(err => {
-      this.load = false;
+      this.loadSTT = false;
+      this.waiting_audio.pause();
       this.toastr.error(err);
     });
   }
@@ -80,7 +92,7 @@ export class VoiceoverComponent implements OnInit {
     if (!text || text.length === 0)
       return
 
-    this.load = true;
+    this.loadTTS = true;
     this.transcription = text;
 
     const observation = this._ttsService.synthesize(this.transcription, provider, language);
@@ -89,10 +101,10 @@ export class VoiceoverComponent implements OnInit {
         const fileReader: FileReader = new FileReader();
         fileReader.onload = this.updateOutputAudioPlayer.bind(this);
         fileReader.readAsDataURL(result.data);
-        this.load = false;
+        this.loadTTS = false;
       }
     ).catch(err => {
-      this.load = false;
+      this.loadTTS = false;
       this.toastr.error(err);
     });
   }
