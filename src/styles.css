@@ -66,9 +66,25 @@ section{
 }
 
 footer{
-    background-color: var(--black);
+    background-color: #0e3244;
     height: 64px;
-    width: 100%;
+    width: calc(100% - 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 48px;
+}
+
+footer div a {
+    margin: 0 12px;
+    color: transparent;
+    font-size: X-large;
+    opacity: 0.2; 
+    filter: invert(100%);
+}
+
+footer div a:hover{
+    opacity: 1; 
 }
 
 h1, 
