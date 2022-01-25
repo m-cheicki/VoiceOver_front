@@ -29,32 +29,16 @@
     --line-height-header: 1.5em; 
     --line-height-body: 1.8em; 
 
-    /**** UI Elements ****/
-    /** Navigation **/
-
     /** Call-to-actions **/
     --button-fontfam: var(--family-button);
-    --button-fontsize: 0.85em;
-    --button-fontweight: 500;
+    --button-fontsize: 1em;
+    --button-fontweight: 600;
     --button-lineheight: 160%;
-    --button-letterspacing: .1em;
+    --button-letterspacing: .05em;
     --button-color-text: var(--light-grey); 
 
     --main-button-color: var(--dark-red); 
     --second-button-color: var(--light-blue-600); 
-
-    /** Checkboxes & Radios **/
-
-    /** Inputs **/
-
-    /** Drag and drop area **/
-
-    /** Loaders and progress bar **/
-
-    /** Modals **/
-
-    /** Notifications **/
-
 }
 
 html, body{
@@ -133,6 +117,7 @@ a:hover{
     box-shadow: 0 0 0 0 var(--dark-red);
     border: transparent;
     cursor: pointer;
+    width: fit-content;
 }
 
 .cta:hover{
@@ -151,7 +136,7 @@ a:hover{
 }
 
 .secondary-cta:hover{
-  border: solid 1px var(--dark-red);
+    border: solid 1px var(--dark-red);
 }
 
 .flex-row {
@@ -166,53 +151,52 @@ a:hover{
 }
 
 /** LOADER **/
-
 .load-container{
     width: 100%;
     margin: 96px 0;
 }
 .load {
-  height: 75px;
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+    height: 75px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 .wave {
-  width: 5px;
-  height: 75px;
-  background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
-  margin: 10px;
-  animation: wave 1s linear infinite;
-  border-radius: 20px;
+    width: 5px;
+    height: 75px;
+    background: linear-gradient(45deg, var(--light-blue), var(--light-blue-600));
+    margin: 10px;
+    animation: wave 1s linear infinite;
+    border-radius: 20px;
 }
 .wave:nth-child(2) {
-  animation-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 .wave:nth-child(3) {
-  animation-delay: 0.2s;
+    animation-delay: 0.2s;
 }
 .wave:nth-child(4) {
-  animation-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 .wave:nth-child(5) {
-  animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 .wave:nth-child(6) {
-  animation-delay: 0.5s;
+    animation-delay: 0.5s;
 }
 .wave:nth-child(7) {
-  animation-delay: 0.6s;
+    animation-delay: 0.6s;
 }
 .wave:nth-child(8) {
-  animation-delay: 0.7s;
+    animation-delay: 0.7s;
 }
 .wave:nth-child(9) {
-  animation-delay: 0.8s;
+    animation-delay: 0.8s;
 }
 .wave:nth-child(10) {
-  animation-delay: 0.9s;
+    animation-delay: 0.9s;
 }
 
 @keyframes wave {
