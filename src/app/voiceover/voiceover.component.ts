@@ -21,6 +21,8 @@ export class VoiceoverComponent implements OnInit {
   public stt: TranscriptionResult[] = [];
   public loadSTT: boolean = false;
   public loadTTS: boolean = false;
+  public autoplay: boolean = false;
+  public waiting_audio = new Audio();
 
   public constructor(
     private _sttService: STTService,
@@ -28,7 +30,9 @@ export class VoiceoverComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.waiting_audio.src = 'assets/audios/waiting_1.wav';
+  }
 
   private reset(): void {
     this.transcription = '';
@@ -58,6 +62,8 @@ export class VoiceoverComponent implements OnInit {
 
   public callApiSTTAll(files: FileList | null): void {
     this.loadSTT = true;
+    this.waiting_audio.play();
+
     if (!files || files.length === 0)
       return
 
@@ -71,13 +77,14 @@ export class VoiceoverComponent implements OnInit {
     const observation = this._sttService.withAll(fileParam, undefined);
     lastValueFrom(observation).then(
       result => {
-        console.log(result);
         this.loadSTT = false;
+        this.waiting_audio.pause();
         this.stt = result;
         this.audioInput.nativeElement.files = null;
       }
     ).catch(err => {
       this.loadSTT = false;
+      this.waiting_audio.pause();
       this.toastr.error(err);
     });
   }
