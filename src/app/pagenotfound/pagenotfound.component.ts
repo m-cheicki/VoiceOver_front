@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagenotfoundComponent implements OnInit {
 
+  public message: string = 'hidden-message';
+
   constructor() { }
 
   ngOnInit(): void {
+    this.showMessage();
+  }
+
+  public showMessage(): void {
+    setTimeout(() => this.message = 'show', 2000);
   }
 
 }

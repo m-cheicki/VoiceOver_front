@@ -1,0 +1,57 @@
+h1{
+    font-size: XX-large;
+    margin: 24px 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container > * {
+    margin: 96px 48px;
+}
+
+.container img{
+    width: 150px; 
+    height: auto;
+}
+
+.hidden-message{
+    visibility: hidden; 
+}
+
+.show{
+    visibility: visible; 
+}
+
+.show + a {
+    translate: 50px;
+}
+
+.show + a {
+    animation: shake 0.5s ease-out;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(-5px);
+    }
+
+    25% {
+        transform: translate(5px);
+    }
+
+    50% {
+        transform: translate(-5px);
+    }
+
+    75% {
+        transform: translate(5px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
