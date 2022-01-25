@@ -1,27 +1,17 @@
 # VoiceOver
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+VoiceOver est une application web permettant de transcrire un audio anglais et de l'écouter avec une autre voix.
 
-## Development server
+[Cliquez ici pour accéder à VoiceOver](http://voiceover.mcheicki.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Comment ça fonctionne ?
+Cela se déroule en 3 grandes étapes :
 
-## Code scaffolding
+1. Je choisis ma source : un fichier audio (.wav) en anglais uniquement
+2. Je transcris cet audio : plusieurs algorithmes vont s'en charger
+3. J'écoute la transcription générée : un homme ou une femme, c'est vous qui choisissez !
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Divers liens 
+- [Backend de VoiceOver](https://github.com/m-cheicki/VoiceOver)
+- [Tests et usages](https://deepnote.com/project/Voice-Over-APIs-NVpBIT5JSUGiLtW6QipP6g/%2FVoiceClone%2Fnotebook.ipynb)
+- [Performances et tests](http://13.69.52.70/)
