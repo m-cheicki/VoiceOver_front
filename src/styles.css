@@ -155,6 +155,16 @@ a:hover{
     border: solid 1px var(--dark-red);
 }
 
+.tertiary-cta{
+    border: solid 2px var(--dark-red-600);
+    color: var(--dark-red-600);
+}
+
+.tertiary-cta:hover{
+    color: var(--light-grey);
+    font-weight: 500;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row; 

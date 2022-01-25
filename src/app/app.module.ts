@@ -17,6 +17,7 @@ import { RequestInterceptor } from './request.interceptor';
 import { API_BASE_URL } from './services/api.service';
 import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
+import { VoicecloningComponent } from './voicecloning/voicecloning.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
     TopBarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    VoiceoverComponent
+    VoiceoverComponent,
+    VoicecloningComponent
   ],
   imports: [
     BrowserModule,
